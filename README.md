@@ -1,0 +1,1 @@
+# badmint-ranking-front-end
