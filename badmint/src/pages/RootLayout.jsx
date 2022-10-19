@@ -41,7 +41,7 @@ export default function RootLayout() {
           },
         }}
         variant="permanent"
-        anchor="left"
+        anchor="right"
       >
         <Toolbar />
         <Divider />
@@ -51,10 +51,20 @@ export default function RootLayout() {
             <ListItemText primary={"Importar campeonato"} />
             </ListItemButton>
           </ListItem>
+          <ListItem key={'import-athlete'} disablePadding>
+            <ListItemButton>
+            <ListItemText primary={"Importar atletas"} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
-    </Box>
-    <Outlet />
+      </Box>
+    <Outlet
+      sx={{
+        /*width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`,*/
+        
+      }}
+    />
     </div>
   );
 }
