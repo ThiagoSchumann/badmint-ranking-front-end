@@ -15,7 +15,8 @@ function Rankings() {
   }, [])  
 
   return (
-    <div style={{ padding: "4rem" }}>
+    <div style={{ padding: "4rem", minWidth: 1120 }}>
+      <h2>Rankings</h2>
       <RankingFilters />
       <RankingsTable rankingQueryResults={rankingQueryResults} />
     </div>
