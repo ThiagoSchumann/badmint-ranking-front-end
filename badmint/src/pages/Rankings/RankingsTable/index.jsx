@@ -1,12 +1,12 @@
+import * as React from "react";
 import Box from "@mui/material/Box";
 import Popover from "@mui/material/Popover";
 import { DataGrid } from "@mui/x-data-grid";
-import * as React from "react";
 
 const columns = [
   {
     field: "classification",
-    headerName: "Classification",
+    headerName: "Classificação",
     width: 110,
     sortable: false,
     hideable: false,
@@ -15,25 +15,30 @@ const columns = [
     description: "Posição do atleta nesse Ranking no período em questão",
   },
   {
-    field: "athleteMemberID",
+    field: "athletesMembersIDs",
     headerName: "Member ID",
+    renderCell: (cellValues) => {return (<label>{cellValues.row.athlete1MemberID}<br/>{cellValues.row.athlete2MemberID}</label>)},
     width: 150,
     sortable: false,
     hideable: false,
+    headerAlign: "center",
     description: "Código do atleta na Federação",
   },
   {
-    field: "athleteName",
-    headerName: "Athlete Name",
+    field: "athletesNames",
+    headerName: "Nome do Atleta/Dupla",
+    renderCell: (cellValues) => {return (<label>{cellValues.row.athlete1Name}<br/>{cellValues.row.athlete2Name}</label>)},
     width: 400,
     sortable: false,
     hideable: false,
+    headerAlign: "center",
   },
   {
-    field: "athleteAge",
-    headerName: "Age",
+    field: "athletesAges",
+    headerName: "Idade",
+    renderCell: (cellValues) => {return (<label>{cellValues.row.athlete1Age}<br/>{cellValues.row.athlete2Age}</label>)},
     type: "number",
-    width: 50,
+    width: 80,
     sortable: false,
     hideable: false,
     headerAlign: "center",
@@ -41,16 +46,18 @@ const columns = [
     description: "Idade do atleta no período em questão",
   },
   {
-    field: "athleteClub",
-    headerName: "Club",
+    field: "athletesClubs",
+    headerName: "Clube",
+    renderCell: (cellValues) => {return (<label>{cellValues.row.athlete1Club}<br/>{cellValues.row.athlete2Club}</label>)},
     width: 110,
     sortable: false,
     hideable: false,
+    headerAlign: "center",
     description: "Clube do atleta no período em questão",
   },
   {
     field: "scorePoints",
-    headerName: "Score Points",
+    headerName: "Pontuação",
     type: "number",
     width: 110,
     sortable: false,
@@ -66,6 +73,7 @@ const columns = [
     width: 300,
     sortable: false,
     hideable: false,
+    headerAlign: "center",
     valueGetter: (params) =>
       `${params.row.athleteName || ""} testing ${
         params.row.athleteMemberID || ""
@@ -82,7 +90,6 @@ function RankingsTable({ rankingQueryResults }) {
       <DataGrid
         rows={rankingQueryResults}
         columns={columns}
-        //components={{Toolbar: GridToolbar}}
         pageSize={25}
         rowsPerPageOptions={[25]}
         disableColumnMenu
@@ -92,15 +99,6 @@ function RankingsTable({ rankingQueryResults }) {
           cell: {
             onMouseEnter: handlePopoverOpen,
           },
-        }}
-        filterModel={{
-          items: [
-            { columnField: "athleteAge", operatorValue: ">", value: "0" },
-          ],
-          items: [
-            { columnField: "scorePoints", operatorValue: ">", value: "0" },
-          ],
-          //linkOperator: GridLinkOperator.And
         }}
       />
       <Popover

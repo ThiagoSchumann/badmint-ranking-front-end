@@ -52,15 +52,51 @@ const categories=[
 // "api/ranking-query?ranking=123&category=abc"
 
 const rankingQuery = [
-  { id: 1, classification: 1, athleteMemberID: 'ab123', athleteName: 'Jon Snow',           athleteAge: 35,    athleteClub: 'IBAD',    scorePoints: 2780 },
-  { id: 2, classification: 2, athleteMemberID: 'cd456', athleteName: 'Cersei Lannister',   athleteAge: 42,    athleteClub: 'CBBd',    scorePoints: 2590 },
-  { id: 3, classification: 3, athleteMemberID: 'ef789', athleteName: 'Jaime Lannister',    athleteAge: 45,    athleteClub: 'IBAD',    scorePoints: 2100 },
-  { id: 4, classification: 4, athleteMemberID: 'gh012', athleteName: 'Arya Stark',         athleteAge: 16,    athleteClub: 'IBAD',    scorePoints: 1880 },
-  { id: 5, classification: 5, athleteMemberID: 'ij345', athleteName: 'Daenerys Targaryen', athleteAge: null,  athleteClub: 'Joacaba', scorePoints: 1740 },
-  { id: 6, classification: 6, athleteMemberID: 'kl678', athleteName: null,                 athleteAge: 150,   athleteClub: 'CBBd',    scorePoints: 1720 },
-  { id: 7, classification: 7, athleteMemberID: 'mn901', athleteName: 'Ferrara Clifford',   athleteAge: 44,    athleteClub: null,      scorePoints: 1050 },
-  { id: 8, classification: 8, athleteMemberID: 'op234', athleteName: 'Rossini Frances',    athleteAge: 36,    athleteClub: 'Joacaba', scorePoints: 970 },
-  { id: 9, classification: 9, athleteMemberID: 'qr567', athleteName: 'Harvey Roxie',       athleteAge: 65,    athleteClub: 'CBBd',    scorePoints: 360 },
+  {
+    id: 1, classification: 1, scorePoints: 2780,
+    athlete1MemberID: 'ab123', athlete1Name: 'Jon Snow',           athlete1Age: 35,    athlete1Club: 'IBAD',
+    athlete2MemberID: '', athlete2Name: '',           athlete2Age: null,    athlete2Club: ''
+  },
+  {
+    id: 2, classification: 2, scorePoints: 2590,
+    athlete1MemberID: 'cd456', athlete1Name: 'Cersei Lannister',   athlete1Age: 42,    athlete1Club: 'CBBd',
+    athlete2MemberID: '', athlete2Name: '',   athlete2Age: null,    athlete2Club: '',
+  },
+  {
+    id: 3, classification: 3, scorePoints: 2100,
+    athlete1MemberID: 'ef789', athlete1Name: 'Jaime Lannister',    athlete1Age: 45,    athlete1Club: 'IBAD',     
+    athlete2MemberID: 'wefj7853jfowe', athlete2Name: 'Khal Drogo',    athlete2Age: 12,    athlete2Club: 'IBCT',
+  },
+  {
+    id: 4, classification: 4, scorePoints: 1880,
+    athlete1MemberID: 'gh012', athlete1Name: 'Arya Stark',         athlete1Age: 16,    athlete1Club: 'IBAD',     
+    athlete2MemberID: '', athlete2Name: '',         athlete2Age: null,    athlete2Club: '',
+  },
+  {
+    id: 5, classification: 5, scorePoints: 1740,
+    athlete1MemberID: 'ij345', athlete1Name: 'Daenerys Targaryen  Sansa Stark Tyrion Lannis da Silva Frederico Neto Antunes de Oliveira Fernandes dos Testes de String Longa', athlete1Age: 19,  athlete1Club: 'Joacaba',  
+    athlete2MemberID: '', athlete2Name: '', athlete2Age: null,  athlete2Club: '',
+  },
+  {
+    id: 6, classification: 6, scorePoints: 1720,
+    athlete1MemberID: 'kl678', athlete1Name: 'Robb Stark',                 athlete1Age: 150,   athlete1Club: 'CBBd',     
+    athlete2MemberID: '', athlete2Name: null,                 athlete2Age: null,   athlete2Club: '',
+  },
+  {
+    id: 7, classification: 7, scorePoints: 1050,
+    athlete1MemberID: 'mn901', athlete1Name: 'Ferrara Clifford',   athlete1Age: 44,    athlete1Club: 'IBCT',       
+    athlete2MemberID: 'string123test', athlete2Name: 'Septa Unella',   athlete2Age: 12,    athlete2Club: 'IBCT',
+  },
+  {
+    id: 8, classification: 8, scorePoints: 970,
+    athlete1MemberID: 'op234', athlete1Name: 'Rossini Frances',    athlete1Age: 36,    athlete1Club: 'Joacaba',  
+    athlete2MemberID: '', athlete2Name: '',    athlete2Age: null,    athlete2Club: '',
+  },
+  {
+    id: 9, classification: 9, scorePoints: 360,
+    athlete1MemberID: 'qr567', athlete1Name: 'Harvey Roxie',       athlete1Age: 65,    athlete1Club: 'CBBd',     
+    athlete2MemberID: '', athlete2Name: '',       athlete2Age: null,    athlete2Club: '',
+  },
 ];
 
 //https://bwfworldtour.bwfbadminton.com/rankings/?id=9&cat_id=57&ryear=2022&week=40&page_size=25&page_no=1
