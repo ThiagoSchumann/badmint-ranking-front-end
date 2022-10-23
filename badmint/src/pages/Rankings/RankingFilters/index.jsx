@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
 import * as React from "react";
+import { styled } from '@mui/material/styles';
 
 const rankingsList = [
   { id: 1, label: "Ranking Estadual de Santa Catarina", },
@@ -19,11 +20,31 @@ const rankingCategoriesList = [
 ];
 
 const rankingPeriodList = [
-  { id: 1, label: "2022 week 22", championshipDate: "2022-06-02" },
-  { id: 2, label: "2022 week 15", championshipDate: "2022-04-14" },
-  { id: 3, label: "2021 week 48", championshipDate: "2021-12-03" },
-  { id: 4, label: "2021 week 09", championshipDate: "2021-03-06" },
+  { id: 1, label: "2022 semana 22", championshipDate: "2022-06-02" },
+  { id: 2, label: "2022 semana 15", championshipDate: "2022-04-14" },
+  { id: 3, label: "2021 semana 48", championshipDate: "2021-12-03" },
+  { id: 4, label: "2021 semana 09", championshipDate: "2021-03-06" },
 ];
+
+const CssTextField = styled(TextField)({
+  "& label.Mui-focused": {
+    color: "#3EB489"
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "#3EB489"
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "#3EB489"
+    },
+    "&:hover fieldset": {
+      borderColor: "#3EB489"
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#3EB489"
+    }
+  }
+});
 
 function RankingFilters() {
   return (
@@ -50,9 +71,8 @@ function RankingFilters() {
               paddingRight: 1
             }}
             renderInput={(params) => (
-              <TextField {...params} label="Ranking" />
+              <CssTextField {...params} label="Ranking" />
             )}
-            //style={{marginLeft: 10, marginRight: 10}}
             style={{ width: "100%" }}
           />
         </Grid>
@@ -67,9 +87,8 @@ function RankingFilters() {
               paddingRight: 1
             }}
             renderInput={(params) => (
-              <TextField {...params} label="Categoria" />
+              <CssTextField {...params} label="Categoria" />
             )}
-            //style={{marginLeft: 10, marginRight: 10}}
             style={{ width: "100%" }}
           />
         </Grid>
@@ -83,9 +102,8 @@ function RankingFilters() {
               width: 208,
             }}
             renderInput={(params) => (
-              <TextField {...params} label="Período do Ranking" />
+              <CssTextField {...params} label="Período do Ranking" />
             )}
-            //style={{marginLeft: 10, marginRight: 10}}
             style={{ width: "100%" }}
           />
         </Grid>
@@ -112,12 +130,11 @@ function RankingFilters() {
         }}
       >
         <Grid xs={3}>
-          <TextField
+          <CssTextField
             id="filterAthleteMemberID"
             label="Member ID"
             variant="outlined"
             size="small"
-            //style={{marginLeft: 10, marginRight: 10}}
             style={{ width: "100%" }}
             sx={{
               paddingRight: 1
@@ -125,12 +142,11 @@ function RankingFilters() {
           />
         </Grid>
         <Grid xs={5}>
-          <TextField
+          <CssTextField
             id="filterAthleteName"
             label="Nome do Atleta/Dupla"
             variant="outlined"
             size="small"
-            //style={{marginLeft: 10, marginRight: 10}}
             style={{ width: "100%" }}
             sx={{
               paddingRight: 1
@@ -138,13 +154,12 @@ function RankingFilters() {
           />
         </Grid>
         <Grid xs={1}>
-          <TextField
+          <CssTextField
             id="filterAthleteAge"
             label="Idade"
             variant="outlined"
             size="small"
             type="number"
-            //style={{marginLeft: 10, marginRight: 10}}
             style={{ width: "100%" }}
             sx={{
               paddingRight: 1
@@ -152,15 +167,16 @@ function RankingFilters() {
           />
         </Grid>
         <Grid xs={2}>
-          <TextField
+          <CssTextField
             id="filterAthleteClub"
             label="Clube"
             variant="outlined"
             size="small"
-            //style={{marginLeft: 10, marginRight: 10}}
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+            }}
             sx={{
-              paddingRight: 1
+              paddingRight: 1,
             }}
           />
         </Grid>

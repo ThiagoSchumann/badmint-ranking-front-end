@@ -24,6 +24,9 @@ export default function RootLayout() {
         <AppBar
           position="fixed"
           // sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
+          style={{
+            backgroundColor: "#3EB489",
+          }}
         >
           <Toolbar>
             <Typography variant="h6" noWrap component="div">

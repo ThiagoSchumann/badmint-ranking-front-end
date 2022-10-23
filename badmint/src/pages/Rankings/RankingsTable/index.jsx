@@ -12,7 +12,7 @@ const columns = [
     hideable: false,
     headerAlign: "center",
     align: "center",
-    description: "Posição do atleta nesse Ranking no período em questão",
+    description: "Posição do atleta nesse Ranking, nessa Categoria, no período em questão",
   },
   {
     field: "athletesMembersIDs",
@@ -32,6 +32,7 @@ const columns = [
     sortable: false,
     hideable: false,
     headerAlign: "center",
+    description: "Nome do atleta (ou atletas, em caso de duplas)",
   },
   {
     field: "athletesAges",
