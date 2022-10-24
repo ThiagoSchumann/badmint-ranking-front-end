@@ -16,22 +16,21 @@ const USE_REMOTE_API=false
 
 //"api/rankings"
 // -> pro dropdown do ranking
-const rankings=[
-  { id: 1, name: "Estadual SC", },
-  { id: 2, name: "Estadual PR", },
-  { id: 3, name: "Clube XYZ", },
-  { id: 4, name: "Nacional", },
-  { id: 5, name: "Clube IBAd", },
-]
-
+const rankingsList = [
+  { id: 1, label: "Ranking Estadual de Santa Catarina", },
+  { id: 2, label: "Ranking Estadual do Paraná", },
+  { id: 3, label: "Ranking Particular do Clube XYZ", },
+  { id: 4, label: "Ranking Nacional Brasileiro de Badminton", },
+  { id: 5, label: "Ranking Privativo do Clube IBAd", },
+];
 
 //"api/category?rankingId=123"
 // -> pro dropdown das categorias
-const categories=[
-  { id: 1, name: "Masculino Duplas Sub-17", },
-  { id: 2, name: "Feminino Simples Principal", },
-  { id: 3, name: "Misto Duplas Senior", },
-] 
+const rankingCategoriesList = [
+  { id: 1, label: "Masculino Duplas Sub-17", },
+  { id: 2, label: "Feminino Simples Principal", },
+  { id: 3, label: "Misto Duplas Senior", },
+];
 
 // "api/ranking-query?ranking=123&category=abc"
 
@@ -101,10 +100,10 @@ class RemoteApiAdapter {
 class StubApiAdapter {
   async get(url) {
     if(url.includes("rankings")) {
-      return { data: rankings };
+      return { data: rankingsList };
     }
     if(url.includes("categories")) {
-      return { data: categories };
+      return { data: rankingCategoriesList };
     }
     if(url.includes("ranking-query")) {
       return { data: rankingQuery };

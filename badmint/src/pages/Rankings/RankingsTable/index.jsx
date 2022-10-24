@@ -87,7 +87,13 @@ function RankingsTable({ rankingQueryResults }) {
   const handlePopoverOpen = (event) => {};
 
   return (
-    <Box sx={{ height: "75vh", width: "100%" }}>
+    <Box
+      sx={{
+        height: "75vh",
+        width: "100%",
+        marginTop: 1,
+      }}
+    >
       <DataGrid
         rows={rankingQueryResults}
         columns={columns}

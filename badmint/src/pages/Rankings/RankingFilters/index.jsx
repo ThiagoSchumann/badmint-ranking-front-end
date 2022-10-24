@@ -4,20 +4,9 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
 import * as React from "react";
 import { styled } from '@mui/material/styles';
-
-const rankingsList = [
-  { id: 1, label: "Ranking Estadual de Santa Catarina", },
-  { id: 2, label: "Ranking Estadual do Paraná", },
-  { id: 3, label: "Ranking Particular do Clube XYZ", },
-  { id: 4, label: "Ranking Nacional Brasileiro de Badminton", },
-  { id: 5, label: "Ranking Privativo do Clube IBAd", },
-];
-
-const rankingCategoriesList = [
-  { id: 1, label: "Masculino Duplas Sub-17", },
-  { id: 2, label: "Feminino Simples Principal", },
-  { id: 3, label: "Misto Duplas Senior", },
-];
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { useEffect, useState } from "react";
 
 const rankingPeriodList = [
   { id: 1, label: "2022 semana 22", championshipDate: "2022-06-02" },
@@ -46,7 +35,17 @@ const CssTextField = styled(TextField)({
   }
 });
 
-function RankingFilters() {
+function RankingFilters({ rankingsListResults, categoriesListResults }) {
+  const [showFilters, setShowFilters] = useState(true);
+  
+  function updateShowFilters() {
+    setShowFilters(!showFilters);
+  }
+
+  useEffect(() => {
+    updateShowFilters();
+  }, [])
+
   return (
     <div>
       <Grid
@@ -65,7 +64,7 @@ function RankingFilters() {
             disablePortal
             id="filterRankings"
             size="small"
-            options={rankingsList}
+            options={rankingsListResults}
             sx={{
               width: 208, 
               paddingRight: 1
@@ -81,7 +80,7 @@ function RankingFilters() {
             disablePortal
             id="filterRankingCategories"
             size="small"
-            options={rankingCategoriesList}
+            options={categoriesListResults}
             sx={{
               width: 208, 
               paddingRight: 1
@@ -116,8 +115,21 @@ function RankingFilters() {
           marginBottom: -15,
           //backgroundColor: 'lightblue',
         }}
+         onClick={ () => updateShowFilters() }
       >
         <h4>Filtros</h4>
+        <ExpandMoreIcon
+          style={{
+            marginTop: 20,
+            display: showFilters ? 'none' : '',
+          }}
+        />
+        <ExpandLessIcon
+          style={{
+            marginTop: 20,
+            display: showFilters ? '' : 'none',
+          }}
+        />
       </div>
       <Grid
         container
@@ -127,6 +139,7 @@ function RankingFilters() {
           marginBottom: 20,
           paddingTop: 1,
           paddingBottom: 1,
+          display: showFilters ? '' : 'none',
         }}
       >
         <Grid xs={3}>
