@@ -1,5 +1,5 @@
-// const USE_REMOTE_API=process.env.USE_REMOTE_API
-const USE_REMOTE_API=false
+// const USE_REMOTE_API = process.env.USE_REMOTE_API
+const USE_REMOTE_API = false
 
 // async function onBuscar() {
 //   try {
@@ -98,14 +98,14 @@ class RemoteApiAdapter {
 
 class StubApiAdapter {
   async get(url) {
-    if(url.includes("rankings")) {
-      return { data: rankingsList };
-    }
-    if(url.includes("categories")) {
-      return { data: rankingCategoriesList };
-    }
     if(url.includes("ranking-query")) {
       return { data: rankingQuery };
+    }
+    if(url.includes("category")) {
+      return { data: rankingCategoriesList };
+    }
+    if(url.includes("ranking")) {
+      return { data: rankingsList };
     }
   }
   post(params) {
@@ -113,6 +113,10 @@ class StubApiAdapter {
   }
   delete(params) {
     throw new Error("Method not implemented.");
+  }
+  getRankingID(RankingName) {
+    let search = rankingsList.find(o => o.label === RankingName);
+    return search != null ? search.id.toString() : '0';
   }
 }
 

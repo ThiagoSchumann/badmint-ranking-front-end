@@ -9,6 +9,7 @@ function Rankings() {
   const [rankingQueryResults, setRankingQueryResults] = useState([]);
 
   useEffect(() => {
+    console.log('a: '+RankingFilters.RankingSelected);
     async function getRankingsList() {
       const result = await RankingsController.getRankingsList();
       setRankingsListResults(result);
@@ -24,7 +25,7 @@ function Rankings() {
     getRankingsList();
     getCategoriesList();
     getRankingQuery();
-  }, [])
+  }, [RankingFilters.RankingSelected])
 
   return (
     <div style={{ padding: "4rem", minWidth: 1120 }}>

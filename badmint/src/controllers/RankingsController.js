@@ -1,4 +1,5 @@
 import ApiAdapter from "../api/apiAdapter";
+import RankingFilters from "../pages/Rankings/index.jsx";
 
 async function getRankingsList() {
   // example for now
@@ -8,7 +9,8 @@ async function getRankingsList() {
 
 async function getCategoriesList() {
   // example for now
-  const response = await ApiAdapter.get("api/category?ranking=123")
+  console.log("caminho: api/category?ranking="+ApiAdapter.getRankingID(RankingFilters.RankingSelected));
+  const response = await ApiAdapter.get("api/category?ranking="+ApiAdapter.getRankingID(RankingFilters.RankingSelected));
   return response.data;
 }
 

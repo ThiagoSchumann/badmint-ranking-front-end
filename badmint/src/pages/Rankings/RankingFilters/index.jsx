@@ -1,13 +1,13 @@
+import * as React from "react";
+import { useEffect, useState } from "react";
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Unstable_Grid2";
-import * as React from "react";
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import { useEffect, useState } from "react";
-import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 const rankingPeriodList = [
   { id: 1, label: "2022 semana 22", championshipDate: "2022-06-02" },
@@ -49,7 +49,9 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
   }, [])
 
   function selectRanking(RankingID) {
-    setRankingSelected(RankingID)
+    setRankingSelected(RankingID);
+    console.log('b: '+RankingID);
+    console.log('c: '+getRankingID(RankingSelected));
   }
 
   function getRankingID(RankingName) {
@@ -58,7 +60,7 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
   }
 
   return (
-    <div>
+    <div><label>{getRankingID(RankingSelected)}</label>
       <Grid
         container
         spacing={0}
