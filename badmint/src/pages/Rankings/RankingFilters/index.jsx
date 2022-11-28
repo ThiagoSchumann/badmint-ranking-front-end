@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useEffect, useState } from "react";
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 const rankingPeriodList = [
   { id: 1, label: "2022 semana 22", championshipDate: "2022-06-02" },
@@ -37,6 +38,7 @@ const CssTextField = styled(TextField)({
 
 function RankingFilters({ rankingsListResults, categoriesListResults }) {
   const [showFilters, setShowFilters] = useState(true);
+  const [RankingSelected, setRankingSelected] = useState('');
   
   function updateShowFilters() {
     setShowFilters(!showFilters);
@@ -45,6 +47,15 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
   useEffect(() => {
     updateShowFilters();
   }, [])
+
+  function selectRanking(RankingID) {
+    setRankingSelected(RankingID)
+  }
+
+  function getRankingID(RankingName) {
+    let search = rankingsListResults.find(o => o.label === RankingName);
+    return search != null ? search.id.toString() : '0';
+  }
 
   return (
     <div>
@@ -64,15 +75,21 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
             disablePortal
             id="filterRankings"
             size="small"
-            options={rankingsListResults}
             sx={{
               width: 208, 
               paddingRight: 1
             }}
+            style={{ width: "100%" }}
             renderInput={(params) => (
               <CssTextField {...params} label="Ranking" />
             )}
-            style={{ width: "100%" }}
+            options={rankingsListResults}
+            value={RankingSelected}
+            // onChange={ (event, newValue) => selectRanking(newValue) }
+            inputValue={RankingSelected}
+            onInputChange={(event, newInputValue) => {
+              selectRanking(newInputValue)
+            }}
           />
         </Grid>
         <Grid xs={4}>
@@ -115,7 +132,7 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
           marginBottom: -15,
           //backgroundColor: 'lightblue',
         }}
-         onClick={ () => updateShowFilters() }
+        onClick={ () => updateShowFilters() }
       >
         <h4>Filtros</h4>
         <ExpandMoreIcon
@@ -194,18 +211,25 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
           />
         </Grid>
         <Grid xs={1}>
-          <Button
-            id="filterButtonSearch"
-            variant="contained"
-            disableElevation
+          <Link
+            to="#abc"
             style={{
-              backgroundColor: "#3EB489",
-              width: '100%',
-              height: '100%'
+              textDecoration: "none",
             }}
           >
-            Search
-          </Button>
+            <Button
+              id="filterButtonSearch"
+              variant="contained"
+              disableElevation
+              style={{
+                backgroundColor: "#3EB489",
+                width: '100%',
+                height: '100%',
+              }}
+            >
+              Filtrar
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </div>

@@ -10,11 +10,10 @@ const USE_REMOTE_API=false
 //   }
 // }
 
-
 // ranking=123="Estadual SC"
 // category=abc="Simples masculino sub 17"
 
-//"api/rankings"
+//"api/ranking"
 // -> pro dropdown do ranking
 const rankingsList = [
   { id: 1, label: "Ranking Estadual de Santa Catarina", },
@@ -24,7 +23,7 @@ const rankingsList = [
   { id: 5, label: "Ranking Privativo do Clube IBAd", },
 ];
 
-//"api/category?rankingId=123"
+//"api/category?ranking=123"
 // -> pro dropdown das categorias
 const rankingCategoriesList = [
   { id: 1, label: "Masculino Duplas Sub-17", },
@@ -33,7 +32,7 @@ const rankingCategoriesList = [
 ];
 
 // "api/ranking-query?ranking=123&category=abc"
-
+// "api/ranking-query?ranking=123&category=abc&athletename=ucas%athleteage=15"
 const rankingQuery = [
   {
     id: 1, classification: 1, scorePoints: 2780,
