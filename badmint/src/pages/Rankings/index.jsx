@@ -5,32 +5,63 @@ import RankingsController from '../../controllers/RankingsController'
 
 function Rankings() {
   const [rankingsListResults, setRankingsListResults] = useState([]);
-  const [categoriesListResults, setCategoriesListResults] = useState([]);
-  const [rankingQueryResults, setRankingQueryResults] = useState([]);
+  const [rankingSelected, setRankingSelected] = useState({ label: "", id: null });
 
-  useEffect(() => {
-    console.log('a: '+RankingFilters.RankingSelected);
+  const [categoriesListResults, setCategoriesListResults] = useState([]);
+  const [categorySelected, setCategorySelected] = useState({ label: "", id: null });
+
+  // TODO period calendar state
+  const [rankingQueryResults, setRankingQueryResults] = useState([]);
+  
+  useEffect(function onCreate() {
     async function getRankingsList() {
       const result = await RankingsController.getRankingsList();
       setRankingsListResults(result);
-    }
-    async function getCategoriesList() {
-      const result = await RankingsController.getCategoriesList();
-      setCategoriesListResults(result);
-    }
-    async function getRankingQuery() {
-      const result = await RankingsController.getRankingQuery();
-      setRankingQueryResults(result);
+
+      // just so the grid isn't empty at first
+      setRankingSelected(result[0]);
     }
     getRankingsList();
+  }, [])
+
+  useEffect(function onRankingChange() {
+    async function getCategoriesList() {
+      if(rankingSelected?.id === null) {
+        return
+      }
+
+      const result = await RankingsController.getCategoriesList(rankingSelected.id);
+      setCategoriesListResults(result);
+
+      // just so the grid isn't empty at first
+      setCategorySelected(result[0])
+    }
     getCategoriesList();
+  }, [rankingSelected])
+
+  useEffect(function onCategoryChange() {
+    async function getRankingQuery() {
+      if(rankingSelected?.id === null || categorySelected?.id === null) {
+        return
+      }
+
+      const result = await RankingsController.getRankingQuery(rankingSelected?.id, categorySelected?.id);
+      setRankingQueryResults(result);
+    }
     getRankingQuery();
-  }, [RankingFilters.RankingSelected])
+  }, [categorySelected])
 
   return (
     <div style={{ padding: "4rem", minWidth: 1120 }}>
       <h2>Rankings</h2>
-      <RankingFilters rankingsListResults={rankingsListResults} categoriesListResults={categoriesListResults} />
+      <RankingFilters
+       rankingsListResults={rankingsListResults}
+       categoriesListResults={categoriesListResults}
+       rankingSelected={rankingSelected}
+       setRankingSelected={setRankingSelected}
+       categorySelected={categorySelected}
+       setCategorySelected={setCategorySelected}
+      />
       <RankingsTable rankingQueryResults={rankingQueryResults} />
     </div>
   );

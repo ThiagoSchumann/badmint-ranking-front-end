@@ -40,9 +40,15 @@ const CssTextField = styled(TextField)({
   }
 });
 
-function RankingFilters({ rankingsListResults, categoriesListResults }) {
+function RankingFilters({ 
+  rankingsListResults,
+  categoriesListResults,
+  rankingSelected,
+  setRankingSelected,
+  categorySelected,
+  setCategorySelected,
+}) {
   const [showFilters, setShowFilters] = useState(true);
-  const [RankingSelected, setRankingSelected] = useState('');
   
   function updateShowFilters() {
     setShowFilters(!showFilters);
@@ -52,20 +58,9 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
     updateShowFilters();
   }, [])
 
-  function selectRanking(RankingID) {
-    setRankingSelected(RankingID);
-    console.log('b: '+RankingID);
-    console.log('c: '+getRankingID(RankingSelected));
-  }
-
-  function getRankingID(RankingName) {
-    let search = rankingsListResults.find(o => o.label === RankingName);
-    return search != null ? search.id.toString() : '0';
-  }
-
   const [value, setValue] = React.useState(dayjs('2022-08-18T21:11:54'));
 
-  const handleChange = (newValue) => {
+  const handleDateChange = (newValue) => {
     setValue(newValue);
   };
 
@@ -93,16 +88,14 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
               paddingRight: 1
             }}
             style={{ width: "100%" }}
-            renderInput={(params) => (
+            renderInput={(params) =>  
               <CssTextField {...params} label="Ranking" />
-            )}
+            }
             options={rankingsListResults}
-            value={RankingSelected}
-            // onChange={ (event, newValue) => selectRanking(newValue) }
-            inputValue={RankingSelected}
-            onInputChange={(event, newInputValue) => {
-              selectRanking(newInputValue)
-            }}
+            value={rankingSelected}
+            onChange={ (_, ranking) => setRankingSelected(ranking)}
+            getOptionSelected={(option, value) => option.id === value.id }
+
           />
         </Grid>
         <Grid xs={4}>
@@ -110,7 +103,6 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
             disablePortal
             id="filterRankingCategories"
             size="small"
-            options={categoriesListResults}
             sx={{
               width: 208, 
               paddingRight: 1
@@ -119,6 +111,10 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
               <CssTextField {...params} label="Categoria" />
             )}
             style={{ width: "100%" }}
+            options={categoriesListResults}
+            value={categorySelected}
+            onChange={ (_, category) => setCategorySelected(category)}
+            getOptionSelected={(option, value) => option.id === value.id }
           />
         </Grid>
         <Grid xs={2}>
@@ -135,7 +131,7 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
               label="Período do Ranking"
               inputFormat="DD/MM/YYYY"
               value={value}
-              onChange={handleChange}
+              onChange={handleDateChange}
               renderInput={(params) => (
                 <CssTextField {...params}
                   sx={{width: '100%'}}
