@@ -8,6 +8,10 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { styled } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import dayjs from 'dayjs';
 
 const rankingPeriodList = [
   { id: 1, label: "2022 semana 22", championshipDate: "2022-06-02" },
@@ -59,8 +63,15 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
     return search != null ? search.id.toString() : '0';
   }
 
+  const [value, setValue] = React.useState(dayjs('2022-08-18T21:11:54'));
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
   return (
-    <div><label>{getRankingID(RankingSelected)}</label>
+    <div>
+      {/* <label>{getRankingID(RankingSelected)}</label> */}
       <Grid
         container
         spacing={0}
@@ -72,7 +83,7 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
           paddingBottom: 1,
         }}
       >
-        <Grid xs={5}>
+        <Grid xs={6}>
           <Autocomplete
             disablePortal
             id="filterRankings"
@@ -110,8 +121,35 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
             style={{ width: "100%" }}
           />
         </Grid>
-        <Grid xs={3}>
-          <Autocomplete
+        <Grid xs={2}>
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}            
+            id="filterRankingPeriodDatePickerLocalProvider"
+            renderInput={(params) => (
+              <CssTextField {...params} label="Período do Ranking" />
+            )}
+          >
+            <DesktopDatePicker
+              // disablePortal
+              id="filterRankingPeriodDatePicker"
+              label="Período do Ranking"
+              inputFormat="DD/MM/YYYY"
+              value={value}
+              onChange={handleChange}
+              renderInput={(params) => (
+                <CssTextField {...params}
+                  sx={{width: '100%'}}
+                  size="small"
+                  label="Período do Ranking"
+                  />
+              )}
+              //renderInput={(params) => <TextField {...params} />}
+              // onInputChange={(event, newInputValue) => {
+              //   selectRanking(newInputValue)
+              // }}
+            />
+          </LocalizationProvider>
+          {/* <Autocomplete
             disablePortal
             id="filterRankingPeriod"
             size="small"
@@ -123,7 +161,7 @@ function RankingFilters({ rankingsListResults, categoriesListResults }) {
               <CssTextField {...params} label="Período do Ranking" />
             )}
             style={{ width: "100%" }}
-          />
+          /> */}
         </Grid>
       </Grid>
       <div 
