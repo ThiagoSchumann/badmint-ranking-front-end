@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RankingFilters from "./RankingFilters";
 import RankingsTable from "./RankingsTable";
 import RankingsController from '../../controllers/RankingsController'
+import dayjs from 'dayjs';
 
 function Rankings() {
   const [rankingsListResults, setRankingsListResults] = useState([]);
@@ -10,7 +11,8 @@ function Rankings() {
   const [categoriesListResults, setCategoriesListResults] = useState([]);
   const [categorySelected, setCategorySelected] = useState({ label: "", id: null });
 
-  // TODO period calendar state
+  const [periodDateSelected, setPeriodDateSelected] = useState(dayjs(Date.now()).toISOString().substring(0, 10));
+
   const [rankingQueryResults, setRankingQueryResults] = useState([]);
   
   useEffect(function onCreate() {
@@ -45,11 +47,11 @@ function Rankings() {
         return
       }
 
-      const result = await RankingsController.getRankingQuery(rankingSelected?.id, categorySelected?.id);
+      const result = await RankingsController.getRankingQuery(rankingSelected?.id, categorySelected?.id, periodDateSelected);
       setRankingQueryResults(result);
     }
     getRankingQuery();
-  }, [categorySelected])
+  }, [categorySelected, periodDateSelected])
 
   return (
     <div style={{ padding: "4rem", minWidth: 1120 }}>
@@ -60,6 +62,7 @@ function Rankings() {
        rankingSelected={rankingSelected}
        setRankingSelected={setRankingSelected}
        categorySelected={categorySelected}
+       setPeriodDateSelected={setPeriodDateSelected}
        setCategorySelected={setCategorySelected}
       />
       <RankingsTable rankingQueryResults={rankingQueryResults} />

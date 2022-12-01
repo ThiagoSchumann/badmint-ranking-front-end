@@ -46,6 +46,7 @@ function RankingFilters({
   rankingSelected,
   setRankingSelected,
   categorySelected,
+  setPeriodDateSelected,
   setCategorySelected,
 }) {
   const [showFilters, setShowFilters] = useState(true);
@@ -58,15 +59,18 @@ function RankingFilters({
     updateShowFilters();
   }, [])
 
-  const [value, setValue] = React.useState(dayjs('2022-08-18T21:11:54'));
+  const [value, setValue] = React.useState(dayjs(Date.now()));
 
   const handleDateChange = (newValue) => {
+    if (newValue == null || isNaN(newValue)) {
+      newValue = dayjs(Date.now());
+    }
     setValue(newValue);
+    setPeriodDateSelected(newValue.toISOString().substring(0, 10));
   };
 
   return (
     <div>
-      {/* <label>{getRankingID(RankingSelected)}</label> */}
       <Grid
         container
         spacing={0}
@@ -140,24 +144,8 @@ function RankingFilters({
                   />
               )}
               //renderInput={(params) => <TextField {...params} />}
-              // onInputChange={(event, newInputValue) => {
-              //   selectRanking(newInputValue)
-              // }}
             />
           </LocalizationProvider>
-          {/* <Autocomplete
-            disablePortal
-            id="filterRankingPeriod"
-            size="small"
-            options={rankingPeriodList}
-            sx={{
-              width: 208,
-            }}
-            renderInput={(params) => (
-              <CssTextField {...params} label="Período do Ranking" />
-            )}
-            style={{ width: "100%" }}
-          /> */}
         </Grid>
       </Grid>
       <div 
