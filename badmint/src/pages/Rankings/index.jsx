@@ -13,6 +13,11 @@ function Rankings() {
 
   const [periodDateSelected, setPeriodDateSelected] = useState(dayjs(Date.now()).toISOString().substring(0, 10));
 
+  const [athleteMemberIDFilter, setAthleteMemberIDFilter] = useState(null);
+  const [athleteNameFilter, setAthleteNameFilter] = useState(null);
+  const [athleteAgeFilter, setAthleteAgeFilter] = useState(null);
+  const [athleteClubFilter, setAthleteClubFilter] = useState(null);
+
   const [rankingQueryResults, setRankingQueryResults] = useState([]);
   
   useEffect(function onCreate() {
@@ -42,28 +47,37 @@ function Rankings() {
   }, [rankingSelected])
 
   useEffect(function onCategoryChange() {
+    console.log(athleteMemberIDFilter);
+    console.log(athleteNameFilter);
+    console.log(athleteAgeFilter);
+    console.log(athleteClubFilter);
+
     async function getRankingQuery() {
       if(rankingSelected?.id === null || categorySelected?.id === null) {
         return
       }
 
-      const result = await RankingsController.getRankingQuery(rankingSelected?.id, categorySelected?.id, periodDateSelected);
+      const result = await RankingsController.getRankingQuery(rankingSelected?.id, categorySelected?.id, periodDateSelected, athleteMemberIDFilter, athleteNameFilter, athleteAgeFilter, athleteClubFilter);
       setRankingQueryResults(result);
     }
     getRankingQuery();
-  }, [categorySelected, periodDateSelected])
+  }, [categorySelected, periodDateSelected, athleteMemberIDFilter, athleteNameFilter, athleteAgeFilter, athleteClubFilter])
 
   return (
     <div style={{ padding: "4rem", minWidth: 1120 }}>
       <h2>Rankings</h2>
       <RankingFilters
-       rankingsListResults={rankingsListResults}
-       categoriesListResults={categoriesListResults}
-       rankingSelected={rankingSelected}
-       setRankingSelected={setRankingSelected}
-       categorySelected={categorySelected}
-       setPeriodDateSelected={setPeriodDateSelected}
-       setCategorySelected={setCategorySelected}
+        rankingsListResults={rankingsListResults}
+        categoriesListResults={categoriesListResults}
+        rankingSelected={rankingSelected}
+        setRankingSelected={setRankingSelected}
+        categorySelected={categorySelected}
+        setCategorySelected={setCategorySelected}
+        setPeriodDateSelected={setPeriodDateSelected}
+        setAthleteMemberIDFilter={setAthleteMemberIDFilter}
+        setAthleteNameFilter={setAthleteNameFilter}
+        setAthleteAgeFilter={setAthleteAgeFilter}
+        setAthleteClubFilter={setAthleteClubFilter}
       />
       <RankingsTable rankingQueryResults={rankingQueryResults} />
     </div>

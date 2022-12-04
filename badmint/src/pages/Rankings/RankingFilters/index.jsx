@@ -47,7 +47,11 @@ function RankingFilters({
   setRankingSelected,
   categorySelected,
   setPeriodDateSelected,
-  setCategorySelected,
+  setCategorySelected,  
+  setAthleteMemberIDFilter,
+  setAthleteNameFilter,
+  setAthleteAgeFilter,
+  setAthleteClubFilter,
 }) {
   const [showFilters, setShowFilters] = useState(true);
   
@@ -68,6 +72,11 @@ function RankingFilters({
     setValue(newValue);
     setPeriodDateSelected(newValue.toISOString().substring(0, 10));
   };
+
+  const [tempMemberIDFilter, setTempMemberIDFilter] = useState('');
+  const [tempNameFilter, setTempNameFilter] = useState('');
+  const [tempAgeFilter, setTempAgeFilter] = useState('');
+  const [tempClubFilter, setTempClubFilter] = useState('');
 
   return (
     <div>
@@ -193,6 +202,7 @@ function RankingFilters({
             sx={{
               paddingRight: 1
             }}
+            onChange={(v) => setTempMemberIDFilter(v.target.value)}
           />
         </Grid>
         <Grid xs={5}>
@@ -204,7 +214,8 @@ function RankingFilters({
             style={{ width: "100%" }}
             sx={{
               paddingRight: 1
-            }}
+            }}            
+            onChange={(v) => setTempNameFilter(v.target.value)}
           />
         </Grid>
         <Grid xs={1}>
@@ -218,6 +229,7 @@ function RankingFilters({
             sx={{
               paddingRight: 1
             }}
+            onChange={(v) => setTempAgeFilter(v.target.value)}
           />
         </Grid>
         <Grid xs={2}>
@@ -232,6 +244,7 @@ function RankingFilters({
             sx={{
               paddingRight: 1,
             }}
+            onChange={(v) => setTempClubFilter(v.target.value)}
           />
         </Grid>
         <Grid xs={1}>
@@ -249,6 +262,12 @@ function RankingFilters({
                 backgroundColor: "#3EB489",
                 width: '100%',
                 height: '100%',
+              }}
+              onClick={() => {
+                setAthleteMemberIDFilter(tempMemberIDFilter);
+                setAthleteNameFilter(tempNameFilter);
+                setAthleteAgeFilter(tempAgeFilter);
+                setAthleteClubFilter(tempClubFilter);
               }}
             >
               Filtrar
